@@ -4,13 +4,18 @@ import Row from 'react-bootstrap/Row';
 //import Col from 'react-bootstrap/Col';
 import './Game.css';
 import Hand from './Hand';
+import Turn from './Turn';
 
 class Game extends React.Component {
   state = {
-    row1: [1, 2, 3, 4, 5],
-    row2: ['|', '|', '|', '|', '|'],
-    row3: ['|', '|', '|', '|', '|'],
-    hand: 0
+    board: [
+      [1, 2, 3, 4, 5],
+      ['|', '|', '|', '|', '|'],
+      ['|', '|', '|', '|', '|']
+    ],
+    hand: 0,
+    turn: 0,
+    win: false
   };
 
   render() {
@@ -21,20 +26,24 @@ class Game extends React.Component {
         </Container>
         <Container className='box'>
           <Row className='tower'>
-            {this.displayTower(this.state.row1)}
+            {this.displayTower(this.state.board[0])}
+            <br />
+            <button onClick={e => this.buttonClick(0, e)}> Click me</button>
+          </Row>
+          <Row className='tower'>
+            {this.displayTower(this.state.board[1])}
             <br />
             <button onClick={e => this.buttonClick(1, e)}> Click me</button>
           </Row>
           <Row className='tower'>
-            {this.displayTower(this.state.row2)}
+            {this.displayTower(this.state.board[2])}
             <br />
             <button onClick={e => this.buttonClick(2, e)}> Click me</button>
           </Row>
-          <Row className='tower'>
-            {this.displayTower(this.state.row3)}
-            <br />
-            <button onClick={e => this.buttonClick(3, e)}> Click me</button>
-          </Row>
+        </Container>
+
+        <Container className='hand'>
+          <Turn turn={this.state.turn} />
         </Container>
       </div>
     );
@@ -50,57 +59,70 @@ class Game extends React.Component {
   };
 
   buttonClick = num => {
+    var newboard;
+    var x;
     // check if hand is empty
+    console.log(this.state);
     if (this.state.hand === 0) {
-      //check if row is empty
-      if (num === 1) {
-        if (this.state.row1[4] === '|') {
-          console.log('row is empty');
-          return;
-        }
-      }
-      if (num === 2) {
-        if (this.state.row2[4] === '|') {
-          console.log('row is empty');
-          return;
-        }
-      }
-      if (num === 3) {
-        if (this.state.row3[4] === '|') {
-          console.log('row is empty');
-          return;
-        }
+      //check if board is empty
+      if (this.state.board[num][4] === '|') {
+        console.log('row is empty');
+        return;
       }
 
       // check for num to pick up
-      var x = 0;
-      if (num === 1) {
-        while (this.state.row1[x] === '|' && x < 5) {
-          console.log(this.state.row1[x]);
-          x++;
-        }
-        this.setState({ hand: this.state.row1[x] });
+      x = 0;
+      while (this.state.board[num][x] === '|' && x < 5) {
+        console.log(this.state.board[num][x]);
+        x++;
       }
+      this.setState({ hand: this.state.board[num][x] });
+      newboard = this.state.board;
+      newboard[num][x] = '|';
+      this.setState({ board: newboard });
     } else {
-      var x = 0;
-      if (num === 1) {
-      }
-      if (num === 2) {
-        while (this.state.row2[x] === '|' && x < 5) {
-          x++;
-          if (x === 4) {
-            var newrow = this.state.row2;
-            newrow[4] = this.state.hand;
-            this.setState({ row2: newrow });
-            this.setState({ hand: 0 });
-          }
+      // hand not empty
+      x = 0;
+      while (this.state.board[num][x] === '|' && x < 5) {
+        // check for next var
+        x++;
+        // check for empty column
+        if (x === 4 && this.state.board[num][x] === '|') {
+          newboard = this.state.board;
+          newboard[num][4] = this.state.hand;
+          this.setState({ board: newboard });
+          this.setState({ hand: 0 });
+          this.setState({ turn: this.state.turn + 1 });
+          return;
         }
+      }
+      // check if num is smaller
+      if (this.state.hand < this.state.board[num][x] && x !== 0) {
+        console.log('entered smaller');
+        newboard = this.state.board;
+        newboard[num][x - 1] = this.state.hand;
+        this.checkWin();
+        this.setState({ board: newboard });
+        this.setState({ hand: 0 });
+        this.setState({ turn: this.state.turn + 1 });
+        return;
       }
     }
 
     this.render();
     console.log(this.state);
   };
+
+  checkWin() {
+    var x = 0;
+    while (x < 2) {
+      if (this.state.board[2][x] !== x + 1) {
+        this.setState({ win: false });
+      }
+      x++;
+    }
+    this.setState({ win: true });
+  }
 }
 
 export default Game;
