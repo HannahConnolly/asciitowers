@@ -2,20 +2,21 @@ import React from 'react';
 import Container from 'react-bootstrap/Container';
 import Row from 'react-bootstrap/Row';
 //import Col from 'react-bootstrap/Col';
-import './Game.css';
+//import './Game.css';
+import './App.css';
 import Hand from './Hand';
 import Turn from './Turn';
+import Alert from './Alert';
 
 class Game extends React.Component {
   state = {
     board: [
-      [1, 2, 3, 4, 5],
+      [5, 4, 3, 2, 1],
       ['|', '|', '|', '|', '|'],
       ['|', '|', '|', '|', '|']
     ],
     hand: 0,
-    turn: 0,
-    win: false
+    turn: 0
   };
 
   render() {
@@ -45,6 +46,9 @@ class Game extends React.Component {
         <Container className='hand'>
           <Turn turn={this.state.turn} />
         </Container>
+        <Container className='hand'>
+          <Alert alert={this.state.alert} />
+        </Container>
       </div>
     );
   }
@@ -59,13 +63,22 @@ class Game extends React.Component {
   };
 
   buttonClick = num => {
+    if (this.state.win === true) {
+      console.log('win found');
+      return;
+    }
+
+    // reset alert
+    this.setState({ alert: 0 });
     var newboard;
     var x;
+
     // check if hand is empty
     console.log(this.state);
     if (this.state.hand === 0) {
       //check if board is empty
-      if (this.state.board[num][4] === '|') {
+      if (this.state.board[num][4] === '|' && this.state.hand === 0) {
+        this.setState({ alert: 'EMPTY' });
         console.log('row is empty');
         return;
       }
@@ -81,7 +94,7 @@ class Game extends React.Component {
       newboard[num][x] = '|';
       this.setState({ board: newboard });
     } else {
-      // hand not empty
+      // hand not empty - begin place
       x = 0;
       while (this.state.board[num][x] === '|' && x < 5) {
         // check for next var
@@ -93,7 +106,10 @@ class Game extends React.Component {
           this.setState({ board: newboard });
           this.setState({ hand: 0 });
           this.setState({ turn: this.state.turn + 1 });
+          this.checkWin();
           return;
+        } else {
+          this.render();
         }
       }
       // check if num is smaller
@@ -101,27 +117,26 @@ class Game extends React.Component {
         console.log('entered smaller');
         newboard = this.state.board;
         newboard[num][x - 1] = this.state.hand;
-        this.checkWin();
         this.setState({ board: newboard });
         this.setState({ hand: 0 });
         this.setState({ turn: this.state.turn + 1 });
+        this.checkWin();
         return;
+      } else {
+        this.setState({ alert: 'NUM_LARGER' });
+        this.render();
       }
     }
-
+    if (this.state.win === true) {
+    }
     this.render();
     console.log(this.state);
   };
 
   checkWin() {
-    var x = 0;
-    while (x < 2) {
-      if (this.state.board[2][x] !== x + 1) {
-        this.setState({ win: false });
-      }
-      x++;
+    if (this.state.board[2][0] === 1) {
+      this.setState({ alert: 'WIN' });
     }
-    this.setState({ win: true });
   }
 }
 
