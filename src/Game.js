@@ -9,13 +9,16 @@ class Game extends React.Component {
   state = {
     row1: [1, 2, 3, 4, 5],
     row2: ['|', '|', '|', '|', '|'],
-    row3: ['|', '|', '|', '|', '|']
+    row3: ['|', '|', '|', '|', '|'],
+    hand: 0
   };
 
   render() {
     return (
       <div>
-        <Hand num={0} />
+        <Container className='hand'>
+          <Hand num={this.state.hand} />
+        </Container>
         <Container className='box'>
           <Row className='tower'>
             {this.displayTower(this.state.row1)}
@@ -47,7 +50,56 @@ class Game extends React.Component {
   };
 
   buttonClick = num => {
-    console.log('clicked! ' + num);
+    // check if hand is empty
+    if (this.state.hand === 0) {
+      //check if row is empty
+      if (num === 1) {
+        if (this.state.row1[4] === '|') {
+          console.log('row is empty');
+          return;
+        }
+      }
+      if (num === 2) {
+        if (this.state.row2[4] === '|') {
+          console.log('row is empty');
+          return;
+        }
+      }
+      if (num === 3) {
+        if (this.state.row3[4] === '|') {
+          console.log('row is empty');
+          return;
+        }
+      }
+
+      // check for num to pick up
+      var x = 0;
+      if (num === 1) {
+        while (this.state.row1[x] === '|' && x < 5) {
+          console.log(this.state.row1[x]);
+          x++;
+        }
+        this.setState({ hand: this.state.row1[x] });
+      }
+    } else {
+      var x = 0;
+      if (num === 1) {
+      }
+      if (num === 2) {
+        while (this.state.row2[x] === '|' && x < 5) {
+          x++;
+          if (x === 4) {
+            var newrow = this.state.row2;
+            newrow[4] = this.state.hand;
+            this.setState({ row2: newrow });
+            this.setState({ hand: 0 });
+          }
+        }
+      }
+    }
+
+    this.render();
+    console.log(this.state);
   };
 }
 

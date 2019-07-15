@@ -1,7 +1,11 @@
 import React from 'react';
 
-const Hand = num => {
-  return <h2> Hand: {num}</h2>;
+const Hand = props => {
+  if (props.num !== 0) {
+    return <h2> Hand: {props.num}</h2>;
+  } else {
+    return <h2> Hand: empty </h2>;
+  }
 };
 
 export default Hand;
