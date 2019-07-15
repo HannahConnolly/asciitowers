@@ -15,7 +15,7 @@ class Game extends React.Component {
   render() {
     return (
       <div>
-        <Hand className='hand' />
+        <Hand num={0} />
         <Container className='box'>
           <Row className='tower'>
             {this.displayTower(this.state.row1)}
