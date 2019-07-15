@@ -1,6 +1,13 @@
 import React from 'react';
 
 const Alert = props => {
+  if (props.alert === 0) {
+    return (
+      <div>
+        <h3>.</h3>
+      </div>
+    );
+  }
   if (props.alert === 'EMPTY') {
     return <h2>Error! column empty</h2>;
   } else if (props.alert === 'NUM_LARGER') {

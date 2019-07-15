@@ -1,13 +1,10 @@
 import React from 'react';
 import Container from 'react-bootstrap/Container';
-import Row from 'react-bootstrap/Row';
-//import Col from 'react-bootstrap/Col';
-//import './Game.css';
 import './App.css';
 import Hand from './Hand';
 import Turn from './Turn';
 import Alert from './Alert';
-
+import Instructions from './Instructions';
 class Game extends React.Component {
   state = {
     board: [
@@ -22,33 +19,41 @@ class Game extends React.Component {
   render() {
     return (
       <div>
-        <Container className='hand'>
-          <Hand num={this.state.hand} />
-        </Container>
-        <Container className='box'>
-          <Row className='tower'>
-            {this.displayTower(this.state.board[0])}
-            <br />
-            <button onClick={e => this.buttonClick(0, e)}> Click me</button>
-          </Row>
-          <Row className='tower'>
-            {this.displayTower(this.state.board[1])}
-            <br />
-            <button onClick={e => this.buttonClick(1, e)}> Click me</button>
-          </Row>
-          <Row className='tower'>
-            {this.displayTower(this.state.board[2])}
-            <br />
-            <button onClick={e => this.buttonClick(2, e)}> Click me</button>
-          </Row>
-        </Container>
-
-        <Container className='hand'>
-          <Turn turn={this.state.turn} />
-        </Container>
+        <div className='ui segment'>
+          <Container className='hand'>
+            <Hand num={this.state.hand} />
+          </Container>
+          <div className='ui divider' />
+          <div className='ui three column centered aligned divided grid'>
+            <div className='three wide column'>
+              {this.displayTower(this.state.board[0])}
+              <br />
+              <button onClick={e => this.buttonClick(0, e)}> Click me</button>
+            </div>
+            <div className='three wide column'>
+              <div justify-content='center' align-items='center'>
+                {this.displayTower(this.state.board[1])}
+              </div>
+              <br />
+              <button onClick={e => this.buttonClick(1, e)}> Click me</button>
+            </div>
+            <div className='three wide column'>
+              {this.displayTower(this.state.board[2])}
+              <br />
+              <button onClick={e => this.buttonClick(2, e)}> Click me</button>
+            </div>
+          </div>
+          <div className='ui divider' />
+          <Container className='hand'>
+            <Turn turn={this.state.turn} />
+          </Container>
+        </div>
         <Container className='hand'>
           <Alert alert={this.state.alert} />
         </Container>
+        <div className='ui segment'>
+          <Instructions />
+        </div>
       </div>
     );
   }
@@ -64,7 +69,6 @@ class Game extends React.Component {
 
   buttonClick = num => {
     if (this.state.win === true) {
-      console.log('win found');
       return;
     }
 
@@ -74,19 +78,16 @@ class Game extends React.Component {
     var x;
 
     // check if hand is empty
-    console.log(this.state);
     if (this.state.hand === 0) {
       //check if board is empty
       if (this.state.board[num][4] === '|' && this.state.hand === 0) {
         this.setState({ alert: 'EMPTY' });
-        console.log('row is empty');
         return;
       }
 
       // check for num to pick up
       x = 0;
       while (this.state.board[num][x] === '|' && x < 5) {
-        console.log(this.state.board[num][x]);
         x++;
       }
       this.setState({ hand: this.state.board[num][x] });
@@ -114,7 +115,6 @@ class Game extends React.Component {
       }
       // check if num is smaller
       if (this.state.hand < this.state.board[num][x] && x !== 0) {
-        console.log('entered smaller');
         newboard = this.state.board;
         newboard[num][x - 1] = this.state.hand;
         this.setState({ board: newboard });
@@ -130,7 +130,6 @@ class Game extends React.Component {
     if (this.state.win === true) {
     }
     this.render();
-    console.log(this.state);
   };
 
   checkWin() {
