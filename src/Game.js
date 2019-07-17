@@ -28,19 +28,19 @@ class Game extends React.Component {
             <div className='three wide column'>
               {this.displayTower(this.state.board[0])}
               <br />
-              <button onClick={e => this.buttonClick(0, e)}> Click me</button>
+              <button onClick={e => this.buttonClick(0, e)}>Interact</button>
             </div>
             <div className='three wide column'>
               <div justify-content='center' align-items='center'>
                 {this.displayTower(this.state.board[1])}
               </div>
               <br />
-              <button onClick={e => this.buttonClick(1, e)}> Click me</button>
+              <button onClick={e => this.buttonClick(1, e)}>Interact</button>
             </div>
             <div className='three wide column'>
               {this.displayTower(this.state.board[2])}
               <br />
-              <button onClick={e => this.buttonClick(2, e)}> Click me</button>
+              <button onClick={e => this.buttonClick(2, e)}>Interact</button>
             </div>
           </div>
           <div className='ui divider' />
