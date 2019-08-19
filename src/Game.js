@@ -5,6 +5,7 @@ import Hand from './Hand';
 import Turn from './Turn';
 import Alert from './Alert';
 import Instructions from './Instructions';
+import TurnStack from './TurnStack';
 
 class Game extends React.Component {
   state = {
@@ -17,7 +18,14 @@ class Game extends React.Component {
     turn: 0
   };
 
+  componentDidMount() {}
+
   render() {
+    const isMobile = window.innerWidth <= 800;
+    var buttonText = '';
+
+    if (isMobile) buttonText = ' ';
+    else buttonText = 'Interact';
     return (
       <div>
         <div className='ui segment'>
@@ -25,7 +33,7 @@ class Game extends React.Component {
             <Hand num={this.state.hand} />
           </Container>
           <div className='ui divider' />
-          <div className='ui equal width center aligned padded grid'>
+          <div className='ui equal width center aligned grid'>
             <div
               className='three wide column'
               text-align='center'
@@ -34,10 +42,10 @@ class Game extends React.Component {
               {this.displayTower(this.state.board[0])}
               <br />
               <button
-                className='ui button'
+                className='ui blue button'
                 onClick={e => this.buttonClick(0, e)}
               >
-                Interact
+                {buttonText}
               </button>
             </div>
             <div className='three wide column'>
@@ -50,20 +58,20 @@ class Game extends React.Component {
               </div>
               <br />
               <button
-                className='ui button'
+                className='ui blue button'
                 onClick={e => this.buttonClick(1, e)}
               >
-                Interact
+                {buttonText}
               </button>
             </div>
             <div className='three wide column'>
               {this.displayTower(this.state.board[2])}
               <br />
               <button
-                className='ui button'
+                className='ui blue button'
                 onClick={e => this.buttonClick(2, e)}
               >
-                Interact
+                {buttonText}
               </button>
             </div>
           </div>
@@ -101,7 +109,7 @@ class Game extends React.Component {
       return;
     }
 
-    // reset alert
+    // reset alert message
     this.setState({ alert: 0 });
     var newboard;
     var x;
