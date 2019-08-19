@@ -25,13 +25,21 @@ class Game extends React.Component {
           </Container>
           <div className='ui divider' />
           <div className='ui three column centered aligned divided grid'>
-            <div className='three wide column'>
+            <div
+              className='three wide column'
+              text-align='center'
+              justify-content='center'
+            >
               {this.displayTower(this.state.board[0])}
               <br />
               <button onClick={e => this.buttonClick(0, e)}>Interact</button>
             </div>
             <div className='three wide column'>
-              <div justify-content='center' align-items='center'>
+              <div
+                justify-content='center'
+                align-items='center'
+                text-align='center'
+              >
                 {this.displayTower(this.state.board[1])}
               </div>
               <br />
@@ -44,6 +52,9 @@ class Game extends React.Component {
             </div>
           </div>
           <div className='ui divider' />
+          <Container className='hand'>
+            <button onClick={e => this.buttonClick(2, e)}>Undo</button>
+          </Container>
           <Container className='hand'>
             <Turn turn={this.state.turn} />
           </Container>
@@ -61,7 +72,11 @@ class Game extends React.Component {
   displayTower = tower => {
     var towerDisp = [];
     towerDisp = tower.map(x => {
-      return <div key={Math.random()}>{x}</div>;
+      var ascii = 'I';
+      for (var i = 0; i < x - 1; i++) {
+        ascii += 'II';
+      }
+      return <div key={Math.random()}>{ascii}</div>;
     });
 
     return towerDisp;
