@@ -17,7 +17,7 @@ const Instructions = () => {
       <br />
       <a href='https://semantic-ui.com/'>Created with semantic UI</a>
       <br />
-      <p>created by Hannah Connolly</p>
+      <a href='https://github.com/HannahConnolly'>Created by Hannah Connolly</a>
     </div>
   );
 };

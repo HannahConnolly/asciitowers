@@ -10,9 +10,8 @@ const Hand = props => {
       ascii += 'II';
     }
     return <h2> Hand: {ascii}</h2>;
-  } else {
-    return <h2> Hand: </h2>;
   }
+  return <h2> Hand: </h2>;
 };
 
 export default Hand;

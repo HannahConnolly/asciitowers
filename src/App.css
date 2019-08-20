@@ -1,5 +1,6 @@
 .App {
   position: relative;
+  padding: 5%;
 }
 
 .App-header h1 {
@@ -15,7 +16,7 @@
   justify-content: space-evenly;
 }
 
-.hand {
+.component {
   display: flex;
   justify-content: center;
   align-items: center;

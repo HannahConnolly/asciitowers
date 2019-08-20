@@ -5,7 +5,6 @@ import Hand from './Hand';
 import Turn from './Turn';
 import Alert from './Alert';
 import Instructions from './Instructions';
-import TurnStack from './TurnStack';
 
 class Game extends React.Component {
   state = {
@@ -29,7 +28,7 @@ class Game extends React.Component {
     return (
       <div>
         <div className='ui segment'>
-          <Container className='hand'>
+          <Container className='component'>
             <Hand num={this.state.hand} />
           </Container>
           <div className='ui divider' />
@@ -43,7 +42,7 @@ class Game extends React.Component {
               <br />
               <button
                 className='ui blue button'
-                onClick={e => this.buttonClick(0, e)}
+                onClick={() => this.buttonClick(0)}
               >
                 {buttonText}
               </button>
@@ -59,7 +58,7 @@ class Game extends React.Component {
               <br />
               <button
                 className='ui blue button'
-                onClick={e => this.buttonClick(1, e)}
+                onClick={() => this.buttonClick(1)}
               >
                 {buttonText}
               </button>
@@ -69,18 +68,18 @@ class Game extends React.Component {
               <br />
               <button
                 className='ui blue button'
-                onClick={e => this.buttonClick(2, e)}
+                onClick={() => this.buttonClick(2)}
               >
                 {buttonText}
               </button>
             </div>
           </div>
           <div className='ui divider' />
-          <Container className='hand'>
+          <Container className='component'>
             <Turn turn={this.state.turn} />
           </Container>
         </div>
-        <Container className='hand'>
+        <Container className='component'>
           <Alert alert={this.state.alert} />
         </Container>
         <div className='ui segment'>
