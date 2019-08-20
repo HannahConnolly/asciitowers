@@ -17,8 +17,6 @@ class Game extends React.Component {
     turn: 0
   };
 
-  componentDidMount() {}
-
   render() {
     const isMobile = window.innerWidth <= 800;
     var buttonText = '';

@@ -15,7 +15,7 @@ const Instructions = () => {
         Rules and further reading
       </a>
       <br />
-      <a href='https://semantic-ui.com/'>Created with semantic UI</a>
+      <a href='https://semantic-ui.com/'>Styled using semantic UI</a>
       <br />
       <a href='https://github.com/HannahConnolly'>Created by Hannah Connolly</a>
     </div>
