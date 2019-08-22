@@ -15,6 +15,7 @@ class Game extends React.Component {
       [':', ':', ':', ':', ':'],
       [':', ':', ':', ':', ':']
     ],
+    alert: 0,
     hand: 0,
     turn: 0,
     history: [[[]]]
