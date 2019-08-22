@@ -1,5 +1,7 @@
 import React from 'react';
 import Container from 'react-bootstrap/Container';
+import _ from 'lodash';
+
 import './App.css';
 import Hand from './Hand';
 import Turn from './Turn';
@@ -14,7 +16,8 @@ class Game extends React.Component {
       [':', ':', ':', ':', ':']
     ],
     hand: 0,
-    turn: 0
+    turn: 0,
+    history: [[[]]]
   };
 
   render() {
@@ -141,6 +144,7 @@ class Game extends React.Component {
           this.setState({ board: newboard });
           this.setState({ hand: 0 });
           this.setState({ turn: this.state.turn + 1 });
+          this.saveBoard(); //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
           this.checkWin();
           return;
         } else {
@@ -154,6 +158,7 @@ class Game extends React.Component {
         this.setState({ board: newboard });
         this.setState({ hand: 0 });
         this.setState({ turn: this.state.turn + 1 });
+        this.saveBoard(); //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
         this.checkWin();
         return;
       } else {
@@ -170,6 +175,25 @@ class Game extends React.Component {
     if (this.state.board[2][0] === 1) {
       this.setState({ alert: 'WIN' });
     }
+  }
+
+  // saves current board state into history state obj
+  saveBoard() {
+    var tempboard;
+    // for (var i = 0; i < 3; i++) {
+    //   for (var j = 0; j < 5; j++) {
+    //     tempboard[i][j] = this.state.board[i][j];
+    //     //tempboard = this.state.board;
+    //   }
+    // }
+    tempboard = _.cloneDeep(this.state.board);
+    console.log('tempboard post _' + tempboard);
+    var historyptr = this.state.history;
+    historyptr.push(tempboard);
+    this.setState({ history: historyptr });
+    console.log('hist\n' + historyptr);
+    console.log(tempboard);
+    console.log('board history\n' + this.state.history);
   }
 }
 

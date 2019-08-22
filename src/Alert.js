@@ -4,7 +4,7 @@ const Alert = props => {
   if (props.alert === 0) {
     return (
       <div>
-        <h3 />
+        <h3> </h3>
       </div>
     );
   }
