@@ -180,7 +180,7 @@ class Game extends React.Component {
   buttonColor(col) {
     console.log('hand: ', this.state.hand);
     if (this.state.board[col][4] === ':' && this.state.hand !== '0') {
-      return 'huge ui grey button';
+      return 'large ui grey button';
     }
     var topNum;
     for (var i = 0; i < 5; i++) {
@@ -190,10 +190,10 @@ class Game extends React.Component {
       }
     }
     if (topNum < this.state.hand && this.state.hand !== 0) {
-      return 'huge ui grey button';
+      return 'large ui grey button';
     }
 
-    return 'huge ui blue button';
+    return 'large ui blue button';
   }
 }
 
