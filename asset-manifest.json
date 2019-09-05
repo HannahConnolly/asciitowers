@@ -1,14 +1,14 @@
 {
   "files": {
     "main.css": "/asciitowers/static/css/main.2f553347.chunk.css",
-    "main.js": "/asciitowers/static/js/main.096568a3.chunk.js",
-    "main.js.map": "/asciitowers/static/js/main.096568a3.chunk.js.map",
+    "main.js": "/asciitowers/static/js/main.e32f1351.chunk.js",
+    "main.js.map": "/asciitowers/static/js/main.e32f1351.chunk.js.map",
     "runtime~main.js": "/asciitowers/static/js/runtime~main.c2e8901a.js",
     "runtime~main.js.map": "/asciitowers/static/js/runtime~main.c2e8901a.js.map",
-    "static/js/2.c07d58b0.chunk.js": "/asciitowers/static/js/2.c07d58b0.chunk.js",
-    "static/js/2.c07d58b0.chunk.js.map": "/asciitowers/static/js/2.c07d58b0.chunk.js.map",
+    "static/js/2.f432424d.chunk.js": "/asciitowers/static/js/2.f432424d.chunk.js",
+    "static/js/2.f432424d.chunk.js.map": "/asciitowers/static/js/2.f432424d.chunk.js.map",
     "index.html": "/asciitowers/index.html",
-    "precache-manifest.fdd4891d50aeed9296b94c8cc3c5cc34.js": "/asciitowers/precache-manifest.fdd4891d50aeed9296b94c8cc3c5cc34.js",
+    "precache-manifest.1de7bba98c251a9172e7448957dd86a9.js": "/asciitowers/precache-manifest.1de7bba98c251a9172e7448957dd86a9.js",
     "service-worker.js": "/asciitowers/service-worker.js",
     "static/css/main.2f553347.chunk.css.map": "/asciitowers/static/css/main.2f553347.chunk.css.map"
   }
