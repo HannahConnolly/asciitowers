@@ -6,7 +6,6 @@ import Hand from './Hand';
 import Turn from './Turn';
 import Alert from './Alert';
 import Instructions from './Instructions';
-import { bigIntLiteral } from '@babel/types';
 
 class Game extends React.Component {
   state = {
@@ -18,7 +17,7 @@ class Game extends React.Component {
     alert: 0,
     hand: 0,
     turn: 0,
-    history: [[[]]]
+    htory: [[[]]]
   };
 
   render() {
@@ -27,6 +26,7 @@ class Game extends React.Component {
 
     if (isMobile) buttonText = ' ';
     else buttonText = 'Interact';
+
     return (
       <div>
         <div className='ui segment'>
@@ -180,7 +180,7 @@ class Game extends React.Component {
   buttonColor(col) {
     console.log('hand: ', this.state.hand);
     if (this.state.board[col][4] === ':' && this.state.hand !== '0') {
-      return 'ui grey button';
+      return 'huge ui grey button';
     }
     var topNum;
     for (var i = 0; i < 5; i++) {
@@ -190,10 +190,10 @@ class Game extends React.Component {
       }
     }
     if (topNum < this.state.hand && this.state.hand !== 0) {
-      return 'ui grey button';
+      return 'huge ui grey button';
     }
 
-    return 'ui blue button';
+    return 'huge ui blue button';
   }
 }
 
