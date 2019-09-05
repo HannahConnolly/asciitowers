@@ -45,7 +45,6 @@ class Game extends React.Component {
               <button
                 className={this.buttonColor(0)}
                 onClick={() => this.buttonClick(0)}
-                align-items='center'
               >
                 {buttonText}
               </button>
@@ -62,7 +61,6 @@ class Game extends React.Component {
               <button
                 className={this.buttonColor(1)}
                 onClick={() => this.buttonClick(1)}
-                align-items='center'
               >
                 {buttonText}
               </button>
@@ -73,7 +71,6 @@ class Game extends React.Component {
               <button
                 className={this.buttonColor(2)}
                 onClick={() => this.buttonClick(2)}
-                align-items='center'
               >
                 {buttonText}
               </button>
