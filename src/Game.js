@@ -1,12 +1,12 @@
 import React from 'react';
 import Container from 'react-bootstrap/Container';
-import _ from 'lodash';
 
 import './App.css';
 import Hand from './Hand';
 import Turn from './Turn';
 import Alert from './Alert';
 import Instructions from './Instructions';
+import { bigIntLiteral } from '@babel/types';
 
 class Game extends React.Component {
   state = {
@@ -31,7 +31,7 @@ class Game extends React.Component {
       <div>
         <div className='ui segment'>
           <Container className='component'>
-            <Hand num={this.state.hand} />
+            <Turn turn={this.state.turn} />
           </Container>
           <div className='ui divider' />
           <div className='ui equal width center aligned grid'>
@@ -43,7 +43,7 @@ class Game extends React.Component {
               {this.displayTower(this.state.board[0])}
               <br />
               <button
-                className='ui blue button'
+                className={this.buttonColor(0)}
                 onClick={() => this.buttonClick(0)}
               >
                 {buttonText}
@@ -59,7 +59,7 @@ class Game extends React.Component {
               </div>
               <br />
               <button
-                className='ui blue button'
+                className={this.buttonColor(1)}
                 onClick={() => this.buttonClick(1)}
               >
                 {buttonText}
@@ -69,7 +69,7 @@ class Game extends React.Component {
               {this.displayTower(this.state.board[2])}
               <br />
               <button
-                className='ui blue button'
+                className={this.buttonColor(2)}
                 onClick={() => this.buttonClick(2)}
               >
                 {buttonText}
@@ -78,7 +78,7 @@ class Game extends React.Component {
           </div>
           <div className='ui divider' />
           <Container className='component'>
-            <Turn turn={this.state.turn} />
+            <Hand num={this.state.hand} />
           </Container>
         </div>
         <Container className='component'>
@@ -87,6 +87,7 @@ class Game extends React.Component {
         <div className='ui segment'>
           <Instructions />
         </div>
+        <canvas id='my-canvas'></canvas>
       </div>
     );
   }
@@ -145,7 +146,6 @@ class Game extends React.Component {
           this.setState({ board: newboard });
           this.setState({ hand: 0 });
           this.setState({ turn: this.state.turn + 1 });
-          this.saveBoard(); //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
           this.checkWin();
           return;
         } else {
@@ -159,7 +159,6 @@ class Game extends React.Component {
         this.setState({ board: newboard });
         this.setState({ hand: 0 });
         this.setState({ turn: this.state.turn + 1 });
-        this.saveBoard(); //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
         this.checkWin();
         return;
       } else {
@@ -178,23 +177,23 @@ class Game extends React.Component {
     }
   }
 
-  // saves current board state into history state obj
-  saveBoard() {
-    var tempboard;
-    // for (var i = 0; i < 3; i++) {
-    //   for (var j = 0; j < 5; j++) {
-    //     tempboard[i][j] = this.state.board[i][j];
-    //     //tempboard = this.state.board;
-    //   }
-    // }
-    tempboard = _.cloneDeep(this.state.board);
-    console.log('tempboard post _' + tempboard);
-    var historyptr = this.state.history;
-    historyptr.push(tempboard);
-    this.setState({ history: historyptr });
-    console.log('hist\n' + historyptr);
-    console.log(tempboard);
-    console.log('board history\n' + this.state.history);
+  buttonColor(col) {
+    console.log('hand: ', this.state.hand);
+    if (this.state.board[col][4] === ':' && this.state.hand !== '0') {
+      return 'ui grey button';
+    }
+    var topNum;
+    for (var i = 0; i < 5; i++) {
+      if (this.state.board[col][i] !== ':') {
+        topNum = this.state.board[col][i];
+        break;
+      }
+    }
+    if (topNum < this.state.hand && this.state.hand !== 0) {
+      return 'ui grey button';
+    }
+
+    return 'ui blue button';
   }
 }
 
