@@ -1,10 +1,10 @@
 self.__precacheManifest = (self.__precacheManifest || []).concat([
   {
-    "revision": "6e7107431f07c8d2f3853edbdbabbf52",
+    "revision": "8353e9cd62109ddf79b258f7dbe3158c",
     "url": "/asciitowers/index.html"
   },
   {
-    "revision": "dde93e77aa0deec51c68",
+    "revision": "40509d47dcce05189299",
     "url": "/asciitowers/static/css/main.1f2a1fc8.chunk.css"
   },
   {
@@ -12,8 +12,8 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "/asciitowers/static/js/2.c07d58b0.chunk.js"
   },
   {
-    "revision": "dde93e77aa0deec51c68",
-    "url": "/asciitowers/static/js/main.5caacafe.chunk.js"
+    "revision": "40509d47dcce05189299",
+    "url": "/asciitowers/static/js/main.b2684c90.chunk.js"
   },
   {
     "revision": "adbf6a8986456f6bd20c",
