@@ -65,7 +65,11 @@ class Game extends React.Component {
                 {buttonText}
               </button>
             </div>
-            <div className='three wide column'>
+            <div
+              className='three wide column'
+              text-align='center'
+              justify-content='center'
+            >
               {this.displayTower(this.state.board[2])}
               <br />
               <button
@@ -180,7 +184,7 @@ class Game extends React.Component {
   buttonColor(col) {
     console.log('hand: ', this.state.hand);
     if (this.state.board[col][4] === ':' && this.state.hand !== '0') {
-      return 'large ui grey button';
+      return 'ui grey button';
     }
     var topNum;
     for (var i = 0; i < 5; i++) {
@@ -190,10 +194,10 @@ class Game extends React.Component {
       }
     }
     if (topNum < this.state.hand && this.state.hand !== 0) {
-      return 'large ui grey button';
+      return 'ui grey button';
     }
 
-    return 'large ui blue button';
+    return 'ui blue button';
   }
 }
 
